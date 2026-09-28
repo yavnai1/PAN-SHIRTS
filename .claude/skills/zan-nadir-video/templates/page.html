@@ -1,0 +1,115 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="{{ASSETS}}/fonts/local.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--copper:#A65A2A;--cream:#F8F1DE;--ink:#2A1810;--sand:#D9B27C}
+html,body{width:{{W}}px;height:{{H}}px;background:transparent;direction:rtl;font-family:Heebo,sans-serif;overflow:hidden}
+.hide{display:none!important}
+.serif{font-family:'Frank Ruhl Libre',serif;font-weight:900}
+
+/* ---------- map (image + html labels) ---------- */
+.mw{position:relative}
+.mw img{width:100%;display:block}
+.ml{position:absolute;font-weight:800;color:var(--ink);white-space:nowrap;text-shadow:0 0 4px #fff,0 0 4px #fff,0 0 2px #fff;transform:translate(.55em,-50%)}
+.pin{position:absolute;transform:translate(-50%,40%);background:var(--copper);color:#fff;font-weight:800;padding:.08em .5em .16em;border-radius:.4em;white-space:nowrap;box-shadow:0 3px 10px rgba(0,0,0,.25)}
+
+/* ---------- intro slide ---------- */
+#intro{position:absolute;inset:0;background:var(--cream);display:flex;align-items:center;justify-content:center;gap:90px;padding:70px}
+#intro .col{display:flex;flex-direction:column;align-items:flex-start;max-width:760px}
+#intro .logo{width:440px;margin-bottom:34px}
+#intro .rule{width:160px;height:6px;background:var(--copper);border-radius:3px;margin:0 0 28px}
+#intro .place{font-size:150px;line-height:.95;color:var(--ink)}
+#intro .region{font-size:50px;font-weight:700;color:var(--copper);margin-top:14px}
+#intro .hook{font-size:40px;font-weight:500;color:var(--ink);margin-top:26px;line-height:1.3;max-width:700px}
+#intro .mapbox{width:760px;border:4px solid var(--copper);border-radius:22px;padding:10px;background:#fff;box-shadow:0 20px 50px rgba(42,24,16,.25)}
+#intro .mapbox .ml{font-size:26px}
+#intro .mapbox .pin{font-size:34px}
+.v #intro{flex-direction:column;gap:60px;padding:120px 70px}
+.v #intro .col{align-items:center;text-align:center}
+.v #intro .logo{width:560px}
+.v #intro .rule{margin:0 auto 30px}
+.v #intro .place{font-size:170px}
+.v #intro .mapbox{width:900px}
+
+/* ---------- overlay on the video ---------- */
+#logo{position:absolute;top:40px;left:44px;width:330px;background:rgba(248,241,222,.94);border-radius:22px;padding:16px 22px 10px;border:3px solid var(--copper);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+#logo img{width:100%;display:block}
+#name{position:absolute;right:70px;bottom:250px;display:flex;flex-direction:column;align-items:flex-start}
+#name .n{background:var(--copper);color:#fff;font-size:66px;line-height:1;padding:16px 36px 18px;border-radius:14px 14px 0 14px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+#name .r{background:var(--cream);color:var(--ink);font-weight:700;font-size:36px;padding:8px 30px;border-radius:0 0 14px 14px}
+#name .r b{color:var(--copper)}
+.rc{position:absolute;top:44px;right:56px;background:rgba(248,241,222,.96);border-radius:22px;border:3px solid var(--copper);box-shadow:0 14px 40px rgba(0,0,0,.4);color:var(--ink)}
+#map{padding:22px 26px 22px;width:430px}
+#map .t{font-size:50px;line-height:1}
+#map .u{font-size:28px;font-weight:500;color:var(--copper);margin:6px 0 12px}
+#map .ml{font-size:18px}
+#map .pin{font-size:22px}
+#fact{padding:24px 32px 26px;width:620px}
+#fact .k{font-weight:800;font-size:26px;color:var(--copper);letter-spacing:.5px}
+#fact .h{font-size:52px;line-height:1.1;margin-top:6px}
+#fact .p{font-size:32px;font-weight:500;line-height:1.35;margin-top:10px;text-wrap:balance}
+#sub{position:absolute;bottom:64px;left:0;right:0;text-align:center}
+#sub span{display:inline-block;max-width:1500px;background:rgba(20,12,8,.72);color:#fff;font-weight:800;font-size:54px;line-height:1.3;padding:10px 34px 14px;border-radius:16px}
+/* vertical 9:16 canvas (1080x1920): logo top, cards above the video band, subtitles below it.
+   Bottom ~350px stays clear for the Reels/TikTok caption UI. */
+.v #logo{top:130px;left:50%;transform:translateX(-50%);width:300px;padding:12px 18px 8px}
+.v .rc{top:360px;right:40px}
+.v #fact{width:1000px;right:40px}
+.v #map{width:400px}
+.v #name{right:40px;bottom:auto;top:1080px}
+.v #name .n{font-size:58px}
+.v #sub{bottom:auto;top:1320px;padding:0 40px}
+.v #sub span{font-size:56px;max-width:1000px}
+
+/* ---------- end slide ---------- */
+#end{position:absolute;inset:0;background:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+#end img{width:760px}
+#end .q{font-size:64px;color:var(--ink);margin-top:50px}
+#end .b{margin-top:34px;background:var(--ink);color:var(--cream);font-weight:700;font-size:38px;padding:16px 46px;border-radius:50px}
+.v #end img{width:860px}
+.v #end .q{font-size:80px}
+</style></head>
+<body class="{{LAYOUT}}">
+<div id="intro" class="hide">
+  <div class="col">
+    <img class="logo" src="{{ASSETS}}/logo.png">
+    <div class="rule"></div>
+    <div class="place serif" id="i_place"></div>
+    <div class="region" id="i_region"></div>
+    <div class="hook" id="i_hook"></div>
+  </div>
+  <div class="mapbox"><div class="mw" id="i_map"></div></div>
+</div>
+
+<div id="logo" class="hide"><img src="{{ASSETS}}/logo.png"></div>
+<div id="name" class="hide"><div class="n serif" id="n_n"></div><div class="r" id="n_r"></div></div>
+<div id="map" class="rc hide"><div class="t serif" id="m_t"></div><div class="u" id="m_u"></div><div class="mw" id="m_map"></div></div>
+<div id="fact" class="rc hide"><div class="k"></div><div class="h serif"></div><div class="p"></div></div>
+<div id="sub" class="hide"><span></span></div>
+
+<div id="end" class="hide"><img src="{{ASSETS}}/logo.png"><div class="q serif" id="e_q"></div><div class="b" id="e_b"></div></div>
+
+<script>
+const C = {{CFG}};
+const $ = s => document.querySelector(s);
+function mapHTML(){
+  const m=C.map; let h=`<img src="${C.mapimg}">`;
+  for(const r of m.refs) h+=`<span class="ml" style="left:${r.x}%;top:${r.y}%">${r.name}</span>`;
+  h+=`<span class="pin" style="left:${m.pin.x}%;top:${m.pin.y}%">${C.place.name}</span>`;
+  return h;
+}
+$('#i_place').textContent=C.place.name; $('#i_region').textContent=C.place.region||'';
+$('#i_hook').textContent=C.place.hook||''; $('#i_map').innerHTML=mapHTML();
+$('#m_t').textContent=C.place.name; $('#m_u').textContent=C.place.region||''; $('#m_map').innerHTML=mapHTML();
+if(C.speaker){ $('#n_n').textContent=C.speaker.name; $('#n_r').innerHTML=C.speaker.role_html||''; }
+$('#e_q').textContent=C.end.q; $('#e_b').textContent=C.end.button;
+window.show=s=>{
+  for(const id of ['intro','end','logo','name','map','fact','sub']) $('#'+id).classList.toggle('hide',!s[id]);
+  if(s.sub) $('#sub span').textContent=s.sub;
+  if(s.fact){ $('#fact .k').textContent=s.fact.kicker||''; $('#fact .h').textContent=s.fact.title||'';
+    const p=$('#fact .p'); p.textContent=s.fact.text||''; p.style.display=s.fact.text?'':'none'; }
+};
+window.ready=true;
+</script>
+</body></html>
